@@ -3,7 +3,8 @@ import { useNavigation, CommonActions } from '@react-navigation/native';
 import {
   View, Text, Image, Animated, Dimensions, TouchableOpacity, Linking, StyleSheet,
 } from 'react-native';
-
+import Clipboard from '@react-native-clipboard/clipboard';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Screen, Line, Button } from "../components";
 
 export type WelcomeProps = {
@@ -12,7 +13,7 @@ export type WelcomeProps = {
 
 const anim = new Animated.ValueXY({ x: 0, y: 0 });
 
-const Welcome = ({ baseSlide = 0 }: WelcomeProps) => {
+const Welcome = ({ baseSlide = 2 }: WelcomeProps) => {
   const navigation = useNavigation();
   const [slideNumber, setSlideNumber] = useState(baseSlide);
 
@@ -73,7 +74,6 @@ const Welcome = ({ baseSlide = 0 }: WelcomeProps) => {
               </Text>
               Cette application sert à refléter mes compétences 
               via différentes fonctions.
-              Exemple avec une animation en slide ici même.
             </Text>
           </View>
 
@@ -87,13 +87,12 @@ const Welcome = ({ baseSlide = 0 }: WelcomeProps) => {
             <Text style={styles.textHolder}>
               J'ai créé cette application en utilisant 
               React Native où j'ai 3 ans d'expérience
-              et je m'essaie pour la première fois à TypeScript, 
-              je commence déjà à saisir les différences avec JavaScipt.
+              et je m'essaie pour la première fois à TypeScript.
             </Text>
           </View>
 
           <View style={styles.picture}>
-            <Text style={styles.textHolder}>
+            <Text style={[styles.textHolder, {marginTop: 16}]}>
               En espérant que vous soyez intéressé, 
               vous pouvez trouver mon code sur Github 
               si ce n'est pas déjà fait. N'hésitez pas à m'appeler
@@ -105,9 +104,18 @@ const Welcome = ({ baseSlide = 0 }: WelcomeProps) => {
       </View>
 
       {slideNumber === 2 ? 
-        <Button onPress={() => { 
-          Linking.openURL("https://github.com/FalaiseSol/cvapp");
-          }} text="GitHub >" style={[styles.button, {backgroundColor: "#202020"}]} />
+        <React.Fragment>
+          <TouchableOpacity style={styles.clipboard} onPress={() => {
+            Clipboard.setString("https://github.com/FalaiseSol/cvapp")}}>
+            <Text style={styles.link}>
+              https://github.com/FalaiseSol/cvapp
+            </Text>
+            <Icon name="clipboard" size={20} color="black" />
+          </TouchableOpacity>
+          <Button onPress={() => { 
+            Linking.openURL("https://github.com/FalaiseSol/cvapp");
+          }} text="GitHub" style={[styles.button, {backgroundColor: "#202020"}]} />
+        </React.Fragment>
       : null}
 
       <View style={styles.dotsHolder}>
@@ -169,8 +177,20 @@ const styles = StyleSheet.create({
     letterSpacing: 0.6,
     color: "black",
     textAlign: "justify",
-    marginTop: 16,
     paddingHorizontal: 16,
+  },
+  clipboard: {
+    flexDirection: "row",
+    backgroundColor: "lightgrey",
+    margin: 16,
+    padding: 16,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent:"space-between",
+  },
+  link: {
+    fontSize: 16,
+    color:"blue",
   },
   touchLeft: {
     position: "absolute",
