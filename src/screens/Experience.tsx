@@ -3,14 +3,14 @@ import {
   View, Text,
 } from 'react-native';
 
-const Market = (): JSX.Element => {
+const Experience = (): JSX.Element => {
   return (
     <View>
       <Text>
-        Market
+        Experience
       </Text>
     </View>
   );
 };
 
-export default Market;
+export default Experience;

@@ -3,14 +3,14 @@ import {
   View, Text,
 } from 'react-native';
 
-const Orders = (): JSX.Element => {
+const Sandbox = (): JSX.Element => {
   return (
     <View>
       <Text>
-        Orders
+        Sandbox
       </Text>
     </View>
   );
 };
 
-export default Orders;
+export default Sandbox;

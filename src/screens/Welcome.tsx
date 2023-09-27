@@ -13,7 +13,7 @@ export type WelcomeProps = {
 
 const anim = new Animated.ValueXY({ x: 0, y: 0 });
 
-const Welcome = ({ baseSlide = 2 }: WelcomeProps) => {
+const Welcome = ({ baseSlide = 0 }: WelcomeProps) => {
   const navigation = useNavigation();
   const [slideNumber, setSlideNumber] = useState(baseSlide);
 
@@ -67,7 +67,7 @@ const Welcome = ({ baseSlide = 2 }: WelcomeProps) => {
                 style={{height: 180, width: 180, alignSelf: "center"}}
                 resizeMode="contain" />
             <Text style={styles.textHolder}>
-              Bonjour et bienvenue sur mon application bac à sable.
+              Bonjour et bienvenue sur mon application sandbox.
               Si vous lisez ça,{" "}
               <Text style={{ fontWeight: "bold" }}> 
                 je suis probablement à la recherche d'un travail.{" "}
